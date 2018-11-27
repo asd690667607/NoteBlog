@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:必须是 当前接口UserDao对应的全路径名+接口名  
+    id的值必须是接口里面的方法名
+-->
+<mapper namespace="mapper.UserDao">
+  
+  <select id="findUserByEmail" parameterType="java.lang.String" resultType="User" >
+    SELECT *
+    FROM USER
+    WHERE user_email=#{user_email};
+  </select>
+  <select id="findDeleteUserByEmail" parameterType="java.lang.String" resultType="User" >
+    SELECT *
+    FROM delete_user
+    WHERE user_email=#{user_email};
+  </select>
+   <select id="findUserById" parameterType="int" resultType="User" >
+    SELECT *
+    FROM USER
+    WHERE user_id=#{user_id};
+   </select>
+    <select id="findAllUser"  parameterType="java.lang.String"  resultType="User" >
+    SELECT *
+    FROM USER
+  </select>
+  <select id="findAllDeleteUser"  resultType="User" >
+    SELECT *
+    FROM delete_user
+  </select>
+    <select id="findDeleteUserById" parameterType="int" resultType="User" >
+    SELECT *
+    FROM delete_user
+     WHERE user_id=#{user_id};
+  </select>
+  
+  
+  <insert id="insertUser" parameterType="User">
+ insert into user(user_email,user_nickname,user_password,user_integral,emailVerifyCode) 
+    values(#{user_email},#{user_nickname},#{user_password},#{userIntegral},#{emailVerifyCode});
+  </insert>
+  
+  <update id="updateUser" parameterType="User" >
+    update user
+    <set >
+      
+      <if test="user_nickname != null" >
+        user_nickname = #{user_nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="user_name != null" >
+        user_name = #{user_name,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="user_address != null" >
+        user_address = #{user_address,jdbcType=VARCHAR},
+      </if>
+      <if test="user_company != null" >
+        user_company = #{user_company,jdbcType=VARCHAR},
+      </if>
+       <if test="user_job != null" >
+        user_job = #{user_job,jdbcType=VARCHAR},
+      </if>
+       <if test="user_weixin != null" >
+        user_weixin = #{user_weixin,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+  <delete id="deleteUser">
+  delete from user where user_id=#{user_id};
+  </delete>
+  <delete id="huifuUser">
+  delete from delete_user where user_id=#{user_id};
+  </delete>
+  <insert id="insertDeleteUser" parameterType="User">
+ insert into delete_user(user_id,user_name,user_password,user_nickname,user_weixin,user_email,user_address,user_company) 
+    values(#{user_id},#{user_name},#{user_password},#{user_nickname},#{user_weixin},#{user_email},#{user_address},#{user_company});
+  </insert>
+   <insert id="addUser" parameterType="User">
+   insert into user(user_id,user_name,user_password,user_nickname,user_weixin,user_email,user_address,user_company) 
+    values(#{user_id},#{user_name},#{user_password},#{user_nickname},#{user_weixin},#{user_email},#{user_address},#{user_company});
+  </insert>
+ <update id="updateaUser" parameterType="User" >
+    update user
+    <set>
+      <if test="user_password != null" >
+        user_password = #{user_password,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </update>
+</mapper>
+

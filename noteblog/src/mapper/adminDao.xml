@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:必须是 当前接口UserDao对应的全路径名+接口名  
+    id的值必须是接口里面的方法名
+-->
+<mapper namespace="mapper.AdminDao">
+  
+  <select id="findAdminByName" parameterType="java.lang.String" resultType="Admin" >
+    SELECT *
+    FROM admin
+    WHERE admin_name=#{admin_name};
+  </select>
+   <update id="updateAdmin" parameterType="Admin" >
+    update admin
+    <set >
+      
+      <if test="admin_nickname != null" >
+        admin_nickname = #{admin_nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="admin_password != null" >
+        admin_password = #{admin_password,jdbcType=VARCHAR}
+      </if>
+    </set>
+    where admin_name = #{admin_name,jdbcType=VARCHAR}
+  </update>
+ 
+</mapper>
+

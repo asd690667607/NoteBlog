@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:必须是 当前接口UserDao对应的全路径名+接口名  
+    id的值必须是接口里面的方法名
+-->
+<mapper namespace="mapper.NoteDao">
+  
+  <select id="findNoteByUid" parameterType="int" resultType="bean.Note" >
+    SELECT *
+    FROM blog_note
+    WHERE user_id=#{user_id};
+  </select>
+  
+   <select id="findNoteByntext" parameterType="SelectNote" resultType="bean.Note" >
+   SELECT * FROM blog_note WHERE user_id=#{user_id} and  note_content LIKE #{ntext} 
+  </select>
+  
+  
+  
+  <insert id="insertNote" parameterType="Note">
+ insert into blog_note(note_time,note_content,user_id) 
+    values(#{note_time},#{note_content},#{user_id});
+  </insert>
+</mapper>
+

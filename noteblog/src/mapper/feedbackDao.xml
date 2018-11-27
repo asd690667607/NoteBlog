@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:必须是 当前接口UserDao对应的全路径名+接口名  
+    id的值必须是接口里面的方法名
+-->
+<mapper namespace="mapper.FeedbackDao">
+ 
+
+  <insert id="insertfeedback" parameterType="bean.Feedback">
+ insert into feedback(content,contact) values(#{content},#{contact});
+  </insert>
+  
+  
+</mapper>
+

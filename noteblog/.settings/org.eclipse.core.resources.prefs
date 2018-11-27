@@ -1,0 +1,18 @@
+#Mon Oct 15 09:58:17 CST 2018
+eclipse.preferences.version=1
+encoding//WebRoot/admin_index.html=UTF-8
+encoding//WebRoot/admin_login.html=UTF-8
+encoding//WebRoot/admin_mine.html=UTF-8
+encoding//WebRoot/admin_profile.html=UTF-8
+encoding//WebRoot/article_center.jsp=UTF-8
+encoding//WebRoot/chat.html=UTF-8
+encoding//WebRoot/login.html=UTF-8
+encoding//WebRoot/note.html=UTF-8
+encoding//WebRoot/ntext.html=UTF-8
+encoding//WebRoot/plugins=UTF-8
+encoding//WebRoot/plugins/HandyEditor-1.5.8=UTF-8
+encoding//WebRoot/regist.html=UTF-8
+encoding//WebRoot/verify.html=UTF-8
+encoding//src/entity/GetSessionTag.java=UTF-8
+encoding//src/service/UserServiceImpl.java=UTF-8
+encoding/<project>=UTF-8

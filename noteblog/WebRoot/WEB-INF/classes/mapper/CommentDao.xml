@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:必须是 当前接口BlogDao对应的全路径名+接口名  
+    id的值必须是接口里面的方法名
+-->
+<mapper namespace="mapper.CommentDao">
+  
+  <select id="findAllCommentByBlogId" parameterType="java.lang.Integer" resultType="bean.Comment">
+  select * from blog_comment where blog_id=#{blog_id};
+  </select>
+  
+  <insert id="insertComment" parameterType="bean.Comment">
+  insert into blog_comment(comment_content,comment_time,blog_id,user_email) 
+  values(#{comment_content},#{comment_time},#{blog_id},#{user_email});
+  </insert>
+  <select id="findAllComment" parameterType="java.lang.String" resultType="bean.Comment" >
+    select * from blog_comment where user_email=#{user_email}
+  </select>
+   <select id="deleteCommentById" parameterType="int" >
+    delete from blog_comment where comment_id = #{comment_id}
+  </select>
+</mapper>

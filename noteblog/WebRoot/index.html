@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="res/layui/css/layui.css">
+<link rel="stylesheet"
+	href="plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="plugins/animate/animate.min.css">
+<link rel="stylesheet" href="res/blog/css/style.css">
+
+<title>首页</title>
+</head>
+
+<body class="animated fadeIn">
+	<!--顶部导航栏信息-->
+	<!-- 顶部导航栏 开始到结束  丁兆双 -->
+	
+	<div class="header">
+			<div class="layui-container">
+				<div class="layui-row nav-header">
+					<!--logo-->
+					<div class="layui-col-xs9 layui-col-sm3 layui-col-md3  animated flipInX">
+						<a class="logo" href="index.html"><i class="fa fa-graduation-cap"></i>&nbsp;NoteBlog</a>
+					</div>
+					<!--logo结束-->
+					<!--index页面的右上方导航-->
+					<div class="layui-col-xs3 layui-col-sm-offset2 layui-col-sm7 layui-hide-md layui-hide-lg nav-btn">
+						<a href="javascript:void(0);" id="side-nav"><i class="fa fa-navicon"></i> </a>
+					</div>
+
+					<div class="layui-col-md-offset2 layui-col-md7 layui-hide layui-show-lg-inline-block layui-show-md-inline-block nav-btn">
+						<a href="index.html"  class="active"><i class="layui-icon">&#xe68e;</i> 主页</a>
+						<a href="login.html" id="loginid"><i class="layui-icon"  >&#xe609;</i> 登录</a>
+						<a href="regist.html" id="registerid"><i class="layui-icon" >&#xe609;</i> 注册</a>
+						 <a href="note.html"><i class="layui-icon">&#xe609;</i> 笔记</a>
+
+						<!--<a href="https://github.com/miyakowork" target="_blank"><i class="fa fa-github"
+                                                                           style="font-size: 18px;"></i> GITHUB</a>
+-->
+						<a href="http://localhost:8080/noteblog/comment.do" id="UserSystem"><i class="layui-icon">&#xe715;</i> 个人</a>
+						<a href="javascript:;" onclick="loginAdmin();" id="admin"><i class="layui-icon" >&#xe609;</i> 管理系统</a>
+					</div>
+					<!--右上方导航结束-->
+					<ul class="layui-nav layui-nav-tree layui-nav-side">
+						<li class="layui-nav-item">
+							<a href="index.html" class="layui-this"><i class="layui-icon">&#xe68e;</i>主页</a>
+						</li>
+						<li class="layui-nav-item" id="loginid2">
+							<a href="login.html"><i class="layui-icon">&#xe609;</i> 登录</a>
+						</li>
+						<li class="layui-nav-item" iid="registerid2">
+							<a href="regist.html"><i class="layui-icon">&#xe609;</i> 注册</a>
+						</li>
+						  <li class="layui-nav-item"><a href="note.html" ><i class="layui-icon">&#xe609;</i>笔记</a>
+                           </li>
+						<li class="layui-nav-item" id="UserSystem2">
+							<a href="http://localhost:8080/noteblog/comment.do"><i class="layui-icon">&#xe609;</i> 个人</a>
+						</li>
+							<li class="layui-nav-item" id="admin2">
+							<a href="javascript:;" onclick="loginAdmin();"><i class="layui-icon">&#xe609;</i> 管理系统</a>
+						</li>
+						<!--<li class="layui-nav-item">
+							<a href="https://github.com/miyakowork" target="_blank"><i class="fa fa-github" style="font-size: 18px;"></i> GITHUB</a>
+						</li>-->
+					</ul>
+				</div>
+			</div>
+		</div>
+	
+	
+	<!--顶部导航栏结束-->
+	<hr class="header-hr">
+	<!--统计、时间戳部分-->
+	<div class="layui-container">
+
+		<blockquote class="layui-elem-quote">
+			<!--博文统计：共【<span class="sum-font">51</span>】篇；笔记统计：共【<span class="sum-font">88</span>】条；继续加油，fighting！~\(≧▽≦)/~！-->
+			欢 迎 来 到 NoteBlog 博 客 园
+			<div
+				class="clock layui-show-md-inline-block layui-show-lg-inline-block layui-hide-xs layui-hide-sm">
+				<span class="clock-font">当前日期</span>：<span id="current-datetime"></span>
+			</div>
+		</blockquote>
+
+	</div>
+	<!--统计、时间戳或部分结束-->
+	<!--正文部分-->
+
+	<div id="main-body" class="layui-container">
+		<div class="layui-row layui-col-space10 animated fadeInUp">
+			<div id="article-list" class="layui-col-md9">
+				<!--获取请求的地方-->
+
+
+				<!--获取请求的结束标签板块-->
+			</div>
+
+			<div class="layui-col-md3">
+				<div id="index-affix-side">
+					<div id="search-panel" class="layui-tab layui-tab-card">
+						<div class="layui-tab-content select-none">
+							<p class="title">搜一搜</p>
+							<hr>
+							<input type="text" name="title" required lay-verify="required"
+								placeholder="键入Enter键以搜索" autocomplete="off"
+								class="layui-input search-box" id="blogSearch" onkeypress="getSearch(event)">
+							<!--<input type="submit" value="搜索"/>-->
+						</div>
+					</div>
+
+					<div class="layui-tab layui-tab-card layui-article-cate">
+						<div class="layui-tab-content select-none ">
+							<p class="title">博文分类</p>
+							<hr>
+							<p>
+								<i class="layui-icon">&#xe60a;</i>
+								<!-- 所有的class="blogClass" 会触发点击事件  -->
+								<a href="index.html">全部</a>
+							</p>
+							<p>
+								<i class="layui-icon">&#xe60a;</i>
+								<!-- 所有的class="blogClass" 会触发点击事件  -->
+								<span class="blogClass">美食</span>
+							</p>	
+							<p>
+								<i class="layui-icon">&#xe60a;</i>
+								<span class="blogClass">旅游</span> 
+							</p>
+							<p>
+								<i class="layui-icon">&#xe60a;</i>
+								<span class="blogClass">IT</span>
+							</p>
+							<p>
+								<i class="layui-icon">&#xe60a;</i> 
+								<span class="blogClass">电影</span>
+							</p>
+							<p>
+								<i class="layui-icon">&#xe60a;</i> 
+								<span class="blogClass">生活</span>
+							</p>
+						</div>
+					</div>
+
+					<div class="layui-tab layui-tab-card layui-master-recommend">
+					<!-- 园主推荐文章    recommendBlog 推荐博客 -->
+						<div class="layui-tab-content select-none" id="recommendBlog">
+							<p class="title">园主推荐</p>
+							<hr>
+							
+						</div>
+					</div>
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--底部-->
+	<div class="layui-fluid bottom-nav">
+		<div class="layui-row">
+			<div class="layui-col-md4 layui-col-md-offset4 copyright">
+				<p style="text-align: center;">
+					<i class="fa fa-copyright"></i>&nbsp;欢 迎 你 的 到 来，望 你 满 载 而 归 ！
+					 <a href="//wuwenbin.me" target="_blank"
+						style="color: #1E9FFF;">NoteBlog</a> in 2018 ver 10.
+				</p>
+			</div>
+		</div>
+	</div>
+	<!--底部结束-->
+
+	<script src="res/layui/layui.js"></script>
+	<script src="plugins/jquery/jquery-2.1.4.min.js"></script>
+	<script src="plugins/hc-sticky/hc-sticky.min.js"></script>
+	<script src="res/blog/js/index.js"></script>
+	
+	<!-- 石怀俊  引用js文件 -->
+	<script src="js/blog/bloglist.js"></script>
+	<!-- <script src="js/blog/blogcommon.js"></script> -->
+	
+	<!-- 丁兆双引用js文件 -->
+	<script type="text/javascript" src="js/blog/checkedLogin.js"></script>
+	<script type="text/javascript" src="js/blog/checkadminlogin.js"></script>
+	<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+	<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:必须是 当前接口BlogDao对应的全路径名+接口名  
+    id的值必须是接口里面的方法名
+-->
+<mapper namespace="mapper.BlogDao">
+  
+
+  
+  <select id="findBlogById" parameterType="java.lang.Integer" resultType="bean.Blog">
+    select * from blog_list where blog_id=#{blog_id}
+  </select>
+  
+  <insert id="saveBlog" parameterType="bean.Blog">
+    insert into blog_list values(null,#{blog_title},#{blog_class},#{blog_summary},#{blog_content},#{blog_tag},0,now(),#{user_id})
+  </insert>
+  
+  <delete id="deleteBlogById" parameterType="int">
+    delete from blog_list where blog_id=#{blog_id};
+  </delete>
+   <select id="findAllBlog" parameterType="java.lang.String" resultType="bean.Blog" >
+    select * from blog_list
+    <!--这里可以优化，实现分页取数据，在大量数据时，可以降低服务器压力，同时提高加载速度  -->
+  </select>
+  
+
+  
+  <!--主页搜索    简单的模糊查询，要满足实际需求还需要更复杂的实现 -->
+  <!-- 这里的查询做的不错，使用动态查询 -->
+   <select id="findBlogByTitle" parameterType="java.lang.String" resultType="bean.Blog">
+   select * from blog_list
+   <where>
+   <if test="_parameter!=null">
+   blog_title like CONCAT('%',#{_parameter},'%')
+   </if>
+   </where>
+  </select>
+  
+  <!-- 主页博客类型搜索  通过blog_class查询数据库 -->
+	<select id="findBlogByClass" parameterType="java.lang.String" resultType="bean.Blog">
+	select * from blog_list where blog_class=#{blog_class}
+	</select> 
+	
+	<!-- 主页 博主推荐文章  以点赞数量作为标准 动态获取 --> 
+	<!-- 这里的结果类型注意，可能会报错  指的是一条记录类型-->
+	<select id="findBlogByPraise" resultType="bean.Blog">
+	select * from blog_list order by blog_praise desc;
+	</select>
+	
+	<!-- 博客详情页，点赞，更新表 -->
+	
+	<update id="updatePraiseById" parameterType="java.lang.Integer">
+	update blog_list set blog_praise=blog_praise+1 where blog_id=#{blog_id}
+	</update>
+	 <select id="findAllblogs" parameterType="int" resultType="bean.Blog" >
+    select * from blog_list where user_id=#{user_id}
+  </select>
+  
+
+</mapper>

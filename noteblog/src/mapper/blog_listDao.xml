@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace:必须是 当前接口BlogDao对应的全路径名+接口名  
+    id的值必须是接口里面的方法名
+-->
+<mapper namespace="mapper.Blog_listDao">
+  
+  <select id="findAllblogs" parameterType="java.lang.String" resultType="bean.Blog_list" >
+    select * from blog_list 
+  </select>
+  
+  <select id="deleteBlogById" parameterType="int" >
+    delete from blog_list where blog_id = #{blog_id}
+  </select>
+  
+</mapper>

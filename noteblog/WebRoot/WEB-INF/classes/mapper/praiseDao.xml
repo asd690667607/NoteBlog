@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="mapper.PraiseDao">
+  
+ <!-- 通过用户唯一标识，账号email查询点赞状态 -->
+<select id="findPraiseByEmail" parameterType="java.lang.String" resultType="bean.Praise">
+select * from praise_status where ps_user_email=#{ps_user_email}
+</select>
+
+<!-- 点赞 插入操作 -->
+<insert id="insertPraise" parameterType="bean.Praise">
+insert into praise_status(ps_user_email,ps_blog_id,ps_status) values(#{ps_user_email},#{ps_blog_id},#{ps_status})
+</insert>
+
+</mapper>
